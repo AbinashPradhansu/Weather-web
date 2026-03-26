@@ -8,9 +8,9 @@ export default function SearchBox({updateWeather}){
     let [city, setCity] = useState("");
     
     let [error,setError] = useState(false);
-       let API_URL="https://api.openweathermap.org/data/2.5/weather";
- let API_KEY="26a59db64927b897e412dafce638316f";
- 
+       let API_URL=import.meta.env.VITE_API_URL;
+       let API_KEY=import.meta.env.VITE_API_KEY;
+       
     function handleChange(event){
         setCity(event.target.value);
     }
@@ -32,6 +32,7 @@ export default function SearchBox({updateWeather}){
     }
 
     let getWeatherInfo = async() =>{
+         console.log(API_KEY);
         try{
             let response=await fetch(`${API_URL}?q=${city}&appid=${API_KEY}&units=metric`);
         let jsonResponse = await response.json();
